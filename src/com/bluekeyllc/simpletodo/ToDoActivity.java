@@ -30,11 +30,11 @@ public class ToDoActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_to_do);
 		lvItems = (ListView)findViewById(R.id.lvItems);
-		items = new ArrayList<String>();
+		readItems();
 		itemsAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, items);
 		lvItems.setAdapter(itemsAdapter);
 		setupViewListener();
-//		readItems();
+		
 		
 	}
 
@@ -48,7 +48,6 @@ public class ToDoActivity extends Activity {
 	public void addToDoItem(View v) {
 		EditText etNewItem = (EditText)findViewById(R.id.etNewItem);
 		itemsAdapter.add(etNewItem.getText().toString());
-//		items.add(etNewItem.getText().toString());
 		etNewItem.setText("");
 		saveItems();
 	}
@@ -57,8 +56,9 @@ public class ToDoActivity extends Activity {
 		lvItems.setOnItemLongClickListener(new OnItemLongClickListener() {
 			@Override
 			public boolean onItemLongClick(AdapterView<?> aView, View item, int pos, long id) {
-				items.remove(pos);
-				itemsAdapter.notifyDataSetChanged();
+//				items.remove(pos);
+				itemsAdapter.remove(items.get(pos));
+//				itemsAdapter.notifyDataSetChanged();
 				saveItems();
 				return true;
 				
